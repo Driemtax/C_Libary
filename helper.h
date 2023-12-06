@@ -3,5 +3,6 @@
 
 void randomize_array(int *arr, int size);
 int* array_malloc(int size);
+void swap_numbers(int *a, int *b);
 
 #endif
