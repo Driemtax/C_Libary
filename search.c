@@ -1,5 +1,18 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <search.h>
+
+int linear_search(int *arr, int key, int size){
+    for (int i = 0; i < size; i++)
+    {
+        if (arr[i] == key)
+        {
+            printf("\n");
+            return i;
+        }
+    }
+    printf("\n");
+    return 0;
+}
 
 int binary_search(int *arr, int key, int size){
     int low = 0;
