@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 
 void DecimalToBinary(int number, int size, char *binNumber){
@@ -13,6 +11,12 @@ void DecimalToBinary(int number, int size, char *binNumber){
             binNumber[i] = '1';
         }
         number = number / 2;
+    }
+
+    printf("Binary Number: ");
+    for (int i = 0; i < size; i++)
+    {
+        printf("%c", binNumber[i]);
     }
 }
 
@@ -51,57 +55,6 @@ void initializeArray(char *binNumber, int size){
     {
         binNumber[i] = '0';
     }
-    binNumber[size] = '\0';
-}
-
-char* binaryConcat(char *binNumber, char *fill, int size, int fillSize){
-    int finalSize = size + fillSize;
-    char *final = (char*)malloc((finalSize+1) * sizeof(char));
-    for (int i = 0; i < finalSize; i++)
-    {
-        if (i < fillSize)
-        {
-            final[i] = fill[i];
-        }
-        else {
-            final[i] = binNumber[i - fillSize];
-        }
-    }
-
-    final[finalSize] = '\0';
-
-    return final;
-}
-
-char* formatBinary(char *binNumber, int size){
-    int rest = size % 4;
-    if (!rest)
-    {
-        return binNumber;
-    }
-    else {
-        int fillSize = 4-rest;
-        char *nullFill = (char*)malloc((fillSize+1) * sizeof(char));
-        initializeArray(nullFill, fillSize);
-        binNumber = binaryConcat(binNumber, nullFill, size, fillSize);
-    }
-
-    return binNumber;
-}
-
-void printBinary(char *binNumber){
-    int size = strlen(binNumber);
-
-    printf("Binary Number: ");
-    for (int i = 0; i < size; i++)
-    {
-        if (i && i % 4 == 0)
-        {
-            printf("%c", ' ');
-        }
-        
-        printf("%c", binNumber[i]);
-    }
 }
 
 int main() {
@@ -124,17 +77,9 @@ int main() {
             printf("Binary Number: 0000");
         }
         else {
-            char *binNumber = (char*)malloc((size+1) * sizeof(char));
-            if (binNumber == NULL)
-            {
-                printf("Critical Error! Memory allocation failed.");
-                return 1;
-            }
+            char binNumber[size];
             initializeArray(binNumber, size);
             DecimalToBinary(inputNumber, size, binNumber);
-            binNumber = formatBinary(binNumber, size);
-            printBinary(binNumber);
-            free(binNumber);
         }
         break;
     case 'b':
