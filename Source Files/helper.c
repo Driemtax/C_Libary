@@ -10,6 +10,15 @@ void randomize_array(int *arr, int size){
     printf("\n");
 }
 
+int* initialize_array(int* arr, int size){
+    for (int i = 0; i < size; i++)
+    {
+        arr[i] = 0;
+    }
+    printf("Array initialized.. \n");
+    
+}
+
 int* array_malloc(int size){
     int *ptr = (int*) malloc(size*sizeof(int));
 

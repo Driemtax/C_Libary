@@ -8,6 +8,8 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
+                "D:\\dev\\C_Libary\\Source Files\\search.c",
+                "D:\\dev\\C_Libary\\Source Files\\helper.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
