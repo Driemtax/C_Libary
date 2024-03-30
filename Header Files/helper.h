@@ -3,5 +3,7 @@
 
 void randomize_array(int *arr, int size);
 int* array_malloc(int size);
+char* initialize_char_array(char *arr, int size);
+int* initialize_int_array(int *arr, int size);
 
 #endif

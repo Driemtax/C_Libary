@@ -10,12 +10,24 @@ void randomize_array(int *arr, int size){
     printf("\n");
 }
 
-int* initialize_array(int* arr, int size){
+char* initialize_char_array(char *arr, int size){
+    for (int i = 0; i < size; i++)
+    {
+        arr[i] = '0';
+    }
+
+    return arr;
+    
+}
+
+int* initialize_int_array(int *arr, int size){
     for (int i = 0; i < size; i++)
     {
         arr[i] = 0;
     }
+
     printf("Array initialized.. \n");
+    return arr;
     
 }
 
