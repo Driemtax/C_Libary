@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "helper.h"
-#include "search.h"
+#include "../Header Files/helper.h"
+#include "../Header Files/search.h"
 
 
 int main(){

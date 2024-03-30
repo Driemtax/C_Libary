@@ -26,6 +26,7 @@ int* initialize_int_array(int *arr, int size){
         arr[i] = 0;
     }
 
+    printf("Array initialized.. \n");
     return arr;
     
 }
