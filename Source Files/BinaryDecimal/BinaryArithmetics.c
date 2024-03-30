@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../../Header Files/helper.h"
+#include "DecimalBinaryConverter.h"
 
 char* BinaryAddition(char *summand1, char *summand2, int size){
     int carryBit = 0;
@@ -67,7 +68,56 @@ char* BinaryAddition(char *summand1, char *summand2, int size){
     return result;
 }
 
+char* Subtraction_Unsigned(int num1, int num2){
+    if (num1 < num2)
+    {
+        char null_result[] = "00000000";
+        return null_result;
+    }
+    
+    int size = calculateBitSize(num1);
+    char *minuend = DecimalToBinary(num1);
+    char *subtrahend = DecimalToBinary(num2);
+
+
+    char *result = (char*)malloc((size+1) * sizeof(char));
+    result = initialize_char_array(result, size);
+
+     for (int i = size - 1; i >= 0; i--)
+    {
+        if (minuend[i] == '0' && subtrahend[i] == '0') //case both bits = 0
+        {
+            result[i] = '0';
+        }
+        else if(minuend[i] == '1' && subtrahend[i] == '0') // case minuend = 1 and subtrahend = 0
+        {
+            result[i] = '1';
+        }
+        else if(minuend[i] == '0' && subtrahend[i] == '1') // case minuend = 1 and subtrahend = 0
+        {
+            result[i] = '1';
+        }
+        else if (minuend[i] == '1' && subtrahend[i] == '1') // case minuend = 1 and subtrahend = 1
+        {
+            result[i] = '0';
+        }   
+    }
+
+    result = formatBinary(result, size);
+
+    return result;
+
+}
+
+
+
 int main(){
+    char *finalResult = Subtraction_Unsigned(100, 95);
+    printBinary(finalResult);
+    free(finalResult);
+}
+
+/* int main(){
     char testNumber1[] = "00000001"; // 100
     char testNumber2[] = "00000011"; //  95
                         // exp Result:  11000011
@@ -82,4 +132,4 @@ int main(){
 
     getchar();
     
-}
+} */
