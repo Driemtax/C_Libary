@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "../../Header Files/helper.h"
 
 char* BinaryAddition(char *summand1, char *summand2, int size){
     int carryBit = 0;
@@ -7,10 +8,7 @@ char* BinaryAddition(char *summand1, char *summand2, int size){
     char *result = (char*)malloc(size * sizeof(char));
 
     //change with  utility function when header files are working
-    for (int i = 0; i < size; i++)
-    {
-        result[i] = '0';
-    }
+    result = initialize_char_array(result, size);
 
     for (int i = size - 1; i >= 0; i--)
     {
