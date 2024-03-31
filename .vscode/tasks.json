@@ -8,8 +8,8 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
-                "D:\\dev\\C_Libary\\Source Files\\BinaryDecimal\\DecimalBinaryConverter.c",
-                "D:\\dev\\C_Libary\\Source Files\\helper.c",
+                "C:\\Programmieren\\Projekte\\C_Libary\\Source Files\\BinaryDecimal\\DecimalBinaryConverter.c",
+                "C:\\Programmieren\\Projekte\\C_Libary\\Source Files\\helper.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],

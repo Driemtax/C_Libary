@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../../Header Files/helper.h"
 #include "DecimalBinaryConverter.h"
 
@@ -65,7 +66,28 @@ char* BinaryAddition(char *summand1, char *summand2, int size){
         }   
     }
 
+    formatBinary(result, size);
+
     return result;
+}
+
+char* Negate(char *binNumber, int size){
+    for (int i = 0; i < size; i++)
+    {
+        if (binNumber[i] == '0')
+        {
+            binNumber[i] = '1';
+        }
+        else
+        {
+            binNumber[i] = '0';
+        }
+    }
+
+    binNumber = BinaryAddition(binNumber, "00000001", size);
+
+    return binNumber;
+    
 }
 
 char* Subtraction_Unsigned(int num1, int num2){
@@ -93,7 +115,7 @@ char* Subtraction_Unsigned(int num1, int num2){
         {
             result[i] = '1';
         }
-        else if(minuend[i] == '0' && subtrahend[i] == '1') // case minuend = 1 and subtrahend = 0
+        else if(minuend[i] == '0' && subtrahend[i] == '1') // case minuend = 0 and subtrahend = 1
         {
             result[i] = '1';
         }
@@ -109,10 +131,35 @@ char* Subtraction_Unsigned(int num1, int num2){
 
 }
 
+char* Subtraction(int num1, int num2){
+    int biggerNumber;
+    if (num1 < num2)
+    {
+        biggerNumber = num2;
+    }
+    else
+    {
+        biggerNumber = num1;
+    }
+    
+    int size = calculateBitSize(biggerNumber);
+    char *minuend = DecimalToBinary(num1);
+    char *subtrahend = DecimalToBinary(num2);
+
+    char *result = (char*)malloc((size+1)*sizeof(char));
+    result = initialize_char_array(result, size);
+
+    subtrahend = Negate(subtrahend, strlen(subtrahend));
+
+    result = BinaryAddition(minuend, subtrahend, size);
+
+    return result;
+}
+
 
 
 int main(){
-    char *finalResult = Subtraction_Unsigned(100, 95);
+    char *finalResult = Subtraction(100, 95);
     printBinary(finalResult);
     free(finalResult);
 }
