@@ -2,8 +2,34 @@
 #include <stdlib.h>
 #include <string.h>
 
+int calculateBitSize(int number){
+    int bitCount = 0;
+    for (int i = 1; i <= number; i = i*2)
+    {
+        bitCount++;
+    }
 
-void DecimalToBinary(int number, int size, char *binNumber){
+    return bitCount;
+}
+
+void initializeArray(char *binNumber, int size){
+    for (int i = 0; i < size; i++)
+    {
+        binNumber[i] = '0';
+    }
+    binNumber[size] = '\0';
+}
+
+char* DecimalToBinary(int number){
+    int size = calculateBitSize(number);
+
+    char *binNumber = (char*)malloc((size+1) * sizeof(char));
+            if (binNumber == NULL)
+            {
+                printf("Critical Error! Memory allocation failed.");
+                return 1;
+            }
+            initializeArray(binNumber, size);
     for (int i = size - 1; i >= 0; i--)
     {
         if(number % 2 == 0){
@@ -14,9 +40,13 @@ void DecimalToBinary(int number, int size, char *binNumber){
         }
         number = number / 2;
     }
+
+    return binNumber;
 }
 
-int BinaryToDecimal(char *binNumber, int size) {
+int BinaryToDecimal(char *binNumber) {
+    int size = strlen(binNumber);
+
     int result = 0;
     int bitWeight = 1;
 
@@ -36,23 +66,7 @@ int BinaryToDecimal(char *binNumber, int size) {
     return result;
 }
 
-int calculateBitSize(int number){
-    int bitCount = 0;
-    for (int i = 1; i <= number; i = i*2)
-    {
-        bitCount++;
-    }
 
-    return bitCount;
-}
-
-void initializeArray(char *binNumber, int size){
-    for (int i = 0; i < size; i++)
-    {
-        binNumber[i] = '0';
-    }
-    binNumber[size] = '\0';
-}
 
 char* binaryConcat(char *binNumber, char *fill, int size, int fillSize){
     int finalSize = size + fillSize;
@@ -104,7 +118,7 @@ void printBinary(char *binNumber){
     }
 }
 
-int main() {
+/* int main() {
     char input; int inputNumber;
 
     printf("#################################################\n");
@@ -124,14 +138,7 @@ int main() {
             printf("Binary Number: 0000");
         }
         else {
-            char *binNumber = (char*)malloc((size+1) * sizeof(char));
-            if (binNumber == NULL)
-            {
-                printf("Critical Error! Memory allocation failed.");
-                return 1;
-            }
-            initializeArray(binNumber, size);
-            DecimalToBinary(inputNumber, size, binNumber);
+            char *binNumber = DecimalToBinary(inputNumber);
             binNumber = formatBinary(binNumber, size);
             printBinary(binNumber);
             free(binNumber);
@@ -139,14 +146,14 @@ int main() {
         break;
     case 'b':
         printf("Please enter your binary Number (max 1 Byte): ");
-        char binNumber[8];
+        char binNumber[9];
         initializeArray(binNumber, 8);
         scanf("%s", binNumber);
         
-        int result = BinaryToDecimal(binNumber, 8);
+        int result = BinaryToDecimal(binNumber);
         printf("Decimal Result: %d", result);
         break;
     default:
         break;
     }
-}
+} */

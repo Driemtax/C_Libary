@@ -15,6 +15,7 @@ char* initialize_char_array(char *arr, int size){
     {
         arr[i] = '0';
     }
+    arr[size] = '\0';
 
     return arr;
     
