@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void randomize_array(int *arr, int size){
     printf("Random Array: \n");
