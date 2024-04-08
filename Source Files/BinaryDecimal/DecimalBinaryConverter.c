@@ -173,7 +173,7 @@ void printBinary(char *binNumber){
         scanf("%d", &inputNumber);
         int size = calculateBitSize(inputNumber);
         if(!size){
-            printf("Binary Number: 0000");
+            printf("binary Number: 0000");
         }
         else {
             char *binNumber = DecimalToBinary(inputNumber);
