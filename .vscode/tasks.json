@@ -8,8 +8,7 @@
         "-fdiagnostics-color=always",
         "-g",
         "${file}",
-        "DecimalBinaryConverter.c",
-        "..\\helper.c",
+        "helper.c",
         "-o",
         "${fileDirname}\\${fileBasenameNoExtension}.exe"
       ],
