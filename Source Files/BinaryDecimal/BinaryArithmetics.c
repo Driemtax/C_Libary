@@ -87,41 +87,93 @@ char* Negate(char *binNumber, int size){
     binNumber = BinaryAddition(binNumber, "00000001", size);
 
     return binNumber;
-    
 }
 
-char* Subtraction_Unsigned(int num1, int num2){
-    if (num1 < num2)
-    {
-        char null_result[] = "00000000";
-        return null_result;
-    }
-    
-    int size = calculateBitSize(num1);
+char* Subtraction(int num1, int num2){
+    int size;
     char *minuend = DecimalToBinary(num1);
     char *subtrahend = DecimalToBinary(num2);
+    char *result;
 
+    if (num1 < num2)
+    {
+        size = calculateBitSize(num2);
+        while (size % 8 != 0)
+        {
+            size++;
+        }
+        result = (char*)malloc((size+1) * sizeof(char));
+        result = initialize_char_array(result, size);
+    }
+    else
+    {
+        size = calculateBitSize(num1);
+        while (size % 8 != 0)
+        {
+            size++;
+        }
+        
+        result = (char*)malloc((size+1) * sizeof(char));    
+        result = initialize_char_array(result, size);
+    }
 
-    char *result = (char*)malloc((size+1) * sizeof(char));
-    result = initialize_char_array(result, size);
+    subtrahend = formatBinary(subtrahend, calculateBitSize(num2));
+    minuend = formatBinary(minuend, calculateBitSize(num1));
 
-     for (int i = size - 1; i >= 0; i--)
+    int carryBit = 0;
+    for (int i = size - 1; i >= 0; i--)
     {
         if (minuend[i] == '0' && subtrahend[i] == '0') //case both bits = 0
         {
-            result[i] = '0';
+            if (carryBit)
+            {
+                result[i] = '1';
+                carryBit = 0;
+            }
+            else
+            {
+                result[i] = '0';
+                carryBit = 0;
+            }
         }
         else if(minuend[i] == '1' && subtrahend[i] == '0') // case minuend = 1 and subtrahend = 0
         {
-            result[i] = '1';
+            if (carryBit)
+            {
+                result[i] = '0';
+                carryBit = 0;
+            }
+            else
+            {
+                result[i] = '1';
+                carryBit = 0;
+            }
         }
         else if(minuend[i] == '0' && subtrahend[i] == '1') // case minuend = 0 and subtrahend = 1
         {
-            result[i] = '1';
+            if (carryBit)
+            {
+                result[i] = '0';
+                carryBit = 1;
+            }
+            else
+            {
+                result[i] = '1';
+                carryBit = 1;   
+            }
         }
         else if (minuend[i] == '1' && subtrahend[i] == '1') // case minuend = 1 and subtrahend = 1
         {
-            result[i] = '0';
+            if (carryBit)
+            {
+                result[i] = '1';
+                carryBit = 1;
+            }
+            else
+            {
+                result[i] = '0';
+                carryBit = 0;
+            }
         }   
     }
 
@@ -131,37 +183,16 @@ char* Subtraction_Unsigned(int num1, int num2){
 
 }
 
-char* Subtraction(int num1, int num2){
-    int biggerNumber;
-    if (num1 < num2)
-    {
-        biggerNumber = num2;
-    }
-    else
-    {
-        biggerNumber = num1;
-    }
-    
-    int size = calculateBitSize(biggerNumber);
-    char *minuend = DecimalToBinary(num1);
-    char *subtrahend = DecimalToBinary(num2);
-
-    char *result = (char*)malloc((size+1)*sizeof(char));
-    result = initialize_char_array(result, size);
-
-    subtrahend = Negate(subtrahend, strlen(subtrahend));
-
-    result = BinaryAddition(minuend, subtrahend, size);
-
-    return result;
-}
-
-
-
 int main(){
     char *finalResult = Subtraction(100, 95);
     printBinary(finalResult);
+    unsigned int decimalResult_u = BinaryToDecimal_Unsigned(finalResult);
     free(finalResult);
+    printf("Decimal_u: %d \n", decimalResult_u);
+
+    char *signedTest = Subtraction(95, 100);
+    int decimalResult_s = BinaryToDecimal_Signed(signedTest);
+    printf("Decimal_s: %d \n", decimalResult_s);
 }
 
 /* int main(){

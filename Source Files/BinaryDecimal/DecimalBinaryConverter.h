@@ -2,7 +2,8 @@
 #define DECIMALBINARYCONVERTER_H
 
 char* DecimalToBinary(int number);
-int BinaryToDecimal(char *binNumber);
+unsigned int BinaryToDecimal_Unsigned(char *binNumber);
+int BinaryToDecimal_Signed (char *binNumber);
 int calculateBitSize(int number);
 void initializeArray(char *binNumber, int size);
 char* binaryConcat(char *binNumber, char *fill, int size, int fillSize);

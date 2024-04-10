@@ -27,7 +27,7 @@ char* DecimalToBinary(int number){
             if (binNumber == NULL)
             {
                 printf("Critical Error! Memory allocation failed.");
-                return 1;
+                return "00000000";
             }
             initializeArray(binNumber, size);
     for (int i = size - 1; i >= 0; i--)
@@ -44,10 +44,10 @@ char* DecimalToBinary(int number){
     return binNumber;
 }
 
-int BinaryToDecimal(char *binNumber) {
+ unsigned int BinaryToDecimal_Unsigned(char *binNumber) {
     int size = strlen(binNumber);
 
-    int result = 0;
+    unsigned int result = 0;
     int bitWeight = 1;
 
     for (int i = size-1; i >= 0; i--)
@@ -63,6 +63,42 @@ int BinaryToDecimal(char *binNumber) {
         }   
     }
     
+    return result;
+}
+
+int BinaryToDecimal_Signed (char *binNumber){
+    int size = strlen(binNumber);
+
+    int result = 0;
+    int bitWeight = 1;
+
+    for (int i = size-1; i >= 0; i--)
+    {
+        if (i == 0)
+        {
+            if (binNumber[i] == '0')
+            {
+                break;
+            }
+            else
+            {
+                result -= bitWeight;
+            }
+        }
+        else
+        {
+            if (binNumber[i] == '0')
+            {
+                bitWeight *= 2;
+                continue;
+            }
+            else {
+                result += bitWeight;
+                bitWeight *= 2;
+            }
+        }   
+    }
+
     return result;
 }
 
@@ -116,6 +152,8 @@ void printBinary(char *binNumber){
         
         printf("%c", binNumber[i]);
     }
+
+    printf("\n");
 }
 
 /* int main() {
@@ -135,7 +173,7 @@ void printBinary(char *binNumber){
         scanf("%d", &inputNumber);
         int size = calculateBitSize(inputNumber);
         if(!size){
-            printf("Binary Number: 0000");
+            printf("binary Number: 0000");
         }
         else {
             char *binNumber = DecimalToBinary(inputNumber);
@@ -150,7 +188,7 @@ void printBinary(char *binNumber){
         initializeArray(binNumber, 8);
         scanf("%s", binNumber);
         
-        int result = BinaryToDecimal(binNumber);
+        int result = BinaryToDecimal_Unsigned(binNumber);
         printf("Decimal Result: %d", result);
         break;
     default:
