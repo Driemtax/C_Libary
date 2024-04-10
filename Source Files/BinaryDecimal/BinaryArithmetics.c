@@ -98,15 +98,27 @@ char* Subtraction(int num1, int num2){
     if (num1 < num2)
     {
         size = calculateBitSize(num2);
+        while (size % 8 != 0)
+        {
+            size++;
+        }
         result = (char*)malloc((size+1) * sizeof(char));
         result = initialize_char_array(result, size);
     }
     else
     {
         size = calculateBitSize(num1);
+        while (size % 8 != 0)
+        {
+            size++;
+        }
+        
         result = (char*)malloc((size+1) * sizeof(char));    
         result = initialize_char_array(result, size);
     }
+
+    subtrahend = formatBinary(subtrahend, calculateBitSize(num2));
+    minuend = formatBinary(minuend, calculateBitSize(num1));
 
     int carryBit = 0;
     for (int i = size - 1; i >= 0; i--)
