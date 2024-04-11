@@ -128,7 +128,7 @@ char* Subtraction(int num1, int num2){
             if (carryBit)
             {
                 result[i] = '1';
-                carryBit = 0;
+                carryBit = 1;
             }
             else
             {
@@ -184,13 +184,13 @@ char* Subtraction(int num1, int num2){
 }
 
 int main(){
-    char *finalResult = Subtraction(100, 95);
+    char *finalResult = Subtraction(100, 23);
     printBinary(finalResult);
     unsigned int decimalResult_u = BinaryToDecimal_Unsigned(finalResult);
     free(finalResult);
     printf("Decimal_u: %d \n", decimalResult_u);
 
-    char *signedTest = Subtraction(95, 100);
+    char *signedTest = Subtraction(23, 100);
     int decimalResult_s = BinaryToDecimal_Signed(signedTest);
     printf("Decimal_s: %d \n", decimalResult_s);
 }
