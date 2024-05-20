@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../BinaryDecimal/DecimalBinaryConverter.h"
 
 int calculateHexaSize(int number){ //32
     int size = 0;
@@ -13,6 +12,14 @@ int calculateHexaSize(int number){ //32
 
     return size;
     
+}
+
+void initializeArray(char *binNumber, int size){
+    for (int i = 0; i < size; i++)
+    {
+        binNumber[i] = '0';
+    }
+    binNumber[size] = '\0';
 }
 
 char* DecimalToHexa(int number){
@@ -166,4 +173,43 @@ int HexaToDecimal(char* hexaNum){
     }
 
     return result;
+}
+
+int main(){
+    char input; int inputNumber;
+
+    printf("#################################################\n");
+    printf("Willkommen! Wie möchten Sie umwandeln?\n");
+    printf("#################################################\n");
+    printf("a: Decimal to Hexa \n");
+    printf("b: Hexa to Decimal\n");
+    scanf("%c", &input);
+
+    switch (input)
+    {
+    case 'a':
+        printf("Please enter the number: ");
+        scanf("%d", &inputNumber);
+        int size = calculateHexaSize(inputNumber);
+        if(!size){
+            printf("binary Number: 0000");
+        }
+        else {
+            char *binNumber = DecimalToHexa(inputNumber);
+            printf("Hexa: %s \n", binNumber);
+            free(binNumber);
+        }
+        break;
+    case 'b':
+        printf("Please enter your hexa Number (max 1 Byte): ");
+        char binNumber[3];
+        initializeArray(binNumber, 2);
+        scanf("%s", binNumber);
+        
+        int result = HexaToDecimal(binNumber);
+        printf("Decimal Result: %d", result);
+        break;
+    default:
+        break;
+    }
 }
