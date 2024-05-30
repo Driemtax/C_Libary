@@ -192,7 +192,7 @@ int main(){
         scanf("%d", &inputNumber);
         int size = calculateHexaSize(inputNumber);
         if(!size){
-            printf("binary Number: 0000");
+            printf("hexa Number: 00");
         }
         else {
             char *binNumber = DecimalToHexa(inputNumber);

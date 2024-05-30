@@ -156,7 +156,7 @@ void printBinary(char *binNumber){
     printf("\n");
 }
 
-/*int main() {
+int main() {
     char input; int inputNumber;
 
     printf("#################################################\n");
@@ -194,4 +194,4 @@ void printBinary(char *binNumber){
     default:
         break;
     }
-}*/
+}
