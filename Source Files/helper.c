@@ -19,7 +19,6 @@ char* initialize_char_array(char *arr, int size){
     arr[size] = '\0';
 
     return arr;
-    
 }
 
 int* initialize_int_array(int *arr, int size){
@@ -47,4 +46,23 @@ void swap_numbers(int *a, int *b){
     int temp = *a;
     *a = *b;
     *b = temp;
+}
+
+/* Generic Array print function, dont know how yet
+void print_array(void *arr, int size){
+    for (int i = 0; i < size - 1; i++)
+    {
+        printf("%s", arr[i])
+    }
+    
+}*/
+
+// int array print
+void print_array(int *arr, int size){
+    for (int i = 0; i < size - 1; i++)
+    {
+        printf("%d, ", arr[i]);
+    }
+    printf("%d", arr[size]);
+    printf("\n");
 }
