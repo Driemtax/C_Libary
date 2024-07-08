@@ -1,6 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef enum {
+    ARRAY_INT,
+    ARRAY_CHAR,
+} DataType;
+
+typedef struct {
+    DataType type;
+    size_t size;
+    void* data;
+} GenericArray ;
+
 void randomize_array(int *arr, int size){
     printf("Random Array: \n");
     for (int i = 0; i < size; i++)
@@ -48,21 +59,51 @@ void swap_numbers(int *a, int *b){
     *b = temp;
 }
 
-/* Generic Array print function, dont know how yet
-void print_array(void *arr, int size){
-    for (int i = 0; i < size - 1; i++)
-    {
-        printf("%s", arr[i])
-    }
-    
-}*/
+//Generic Array Create Function
+GenericArray arrayCreate(size_t size, DataType type){
+    size_t effectiveSize = 0;
 
-// int array print
-void print_array(int *arr, int size){
-    for (int i = 0; i < size - 1; i++)
+    switch (type)
     {
-        printf("%d, ", arr[i]);
+    case ARRAY_CHAR:
+        effectiveSize = size * sizeof(char);
+        break;
+    case ARRAY_INT:
+        effectiveSize = size * sizeof(int);
+        break;
+    default:
+        break;
     }
-    printf("%d", arr[size]);
-    printf("\n");
+
+    GenericArray arr = {
+        .type = type,
+        .size = size,
+        .data = malloc(effectiveSize),
+    };
+
+    return arr;
+}
+
+//Generic print function
+void array_print(GenericArray arr){
+    switch (arr.type)
+    {
+    case ARRAY_CHAR:
+        for (int i = 0; i < arr.size - 1; i++)
+        {
+            printf("%c, ", ((char*)arr.data)[i]);
+        }
+        printf("%c", ((char*)arr.data)[arr.size]);
+        printf("\n");
+        break;
+    case ARRAY_INT:
+        for (int i = 0; i < arr.size - 1; i++)
+        {
+            printf("%d, ", ((int*)arr.data)[i]);
+        }
+        printf("%d", ((int*)arr.data)[arr.size]);
+        printf("\n");
+    default:
+        break;
+    }
 }
